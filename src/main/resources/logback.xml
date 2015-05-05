@@ -1,0 +1,22 @@
+<configuration>
+
+    <appender name="splunk" class="edu.fhda.splunk.logging.logback.SplunkLogbackAppender">
+        <hostname>splunk.fhda.edu</hostname>
+        <port>9998</port>
+        <indexSource>myapp</indexSource>
+    </appender>
+
+    <if condition='property("edu.fhda.debug").equalsIgnoreCase("true")'>
+        <then>
+            <root level="DEBUG">
+                <appender-ref ref="splunk" />
+            </root>
+        </then>
+        <else>
+            <root level="INFO">
+                <appender-ref ref="splunk" />
+            </root>
+        </else>
+    </if>
+
+</configuration>

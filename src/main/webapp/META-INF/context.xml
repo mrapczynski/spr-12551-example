@@ -1,0 +1,6 @@
+<Context>
+    <ResourceLink global="jdbc/banner"
+                  name="jdbc/banner"
+                  type="javax.sql.DataSource"
+                  auth="Container" />
+</Context>

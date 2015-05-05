@@ -1,0 +1,102 @@
+/* Plugins */
+apply plugin: "java"
+apply plugin: "project-report"
+apply plugin: "war"
+apply plugin: "asset-pipeline"
+apply from: "https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin"
+
+/* Repositories */
+repositories {
+    jcenter()
+    mavenCentral()
+    maven { url "http://sonatype.ad.fhda.edu/nexus/content/repositories/fhda" }
+    maven { url "http://sonatype.ad.fhda.edu/nexus/content/repositories/thirdparty" }
+}
+
+/* Template details */
+project.ext.templateVersion = "preview"
+
+/* Project Dependencies */
+dependencies {
+    /* Spring dependencies */
+    def springVersion = "4.1.6.RELEASE"
+    def springSecurityVersion = "4.0.0.RELEASE"
+    compile "org.springframework:spring-webmvc:${springVersion}"
+    compile "org.springframework:spring-context-support:${springVersion}"
+    compile "org.springframework:spring-jdbc:${springVersion}"
+    /*
+    compile "org.springframework.security:spring-security-core:${springSecurityVersion}"
+    compile "org.springframework.security:spring-security-config:${springSecurityVersion}"
+    compile "org.springframework.security:spring-security-web:${springSecurityVersion}"
+    compile "org.springframework.security:spring-security-cas:${springSecurityVersion}"
+    */
+    //compile "edu.fhda:spring-security-banner:1.0.6"
+
+    /* Asset pipeline */
+    compile "com.craigburke.angular:angular-template-asset-pipeline:2.1.0"
+
+    /* Application libraries */
+    compile "org.freemarker:freemarker:2.3.22"
+    compile "com.google.guava:guava:18.0"
+    compile "com.typesafe:config:1.2.1"
+    compile "edu.fhda:splunk-appender-logback:1.3"
+    compile "org.codehaus.janino:janino:2.7.8"
+    compile "org.apache.commons:commons-lang3:3.4"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.5.3"
+    providedCompile "javax.servlet:javax.servlet-api:3.1.0"
+    gretty "com.zaxxer:HikariCP:2.3.7"
+    gretty "com.oracle:ojdbc6:11.2.0.4"
+    gretty "com.h2database:h2:1.4.187"
+
+    /* Testing libraries */
+    testCompile "junit:junit:4.12"
+    testCompile "net.sourceforge.htmlunit:htmlunit:2.15"
+    testCompile "org.springframework:spring-test:${springVersion}"
+    testCompile "org.hamcrest:hamcrest-library:1.3"
+    testCompile "com.zaxxer:HikariCP:2.3.6"
+    //testCompile "com.oracle:ojdbc6:11.2.0.4"
+    testCompile "com.h2database:h2:1.4.187"
+}
+
+/* Gretty web container configuration for testing */
+gretty {
+    enableNaming = true
+    loggingLevel = "ERROR"
+    jvmArgs = ["-Dedu.fhda.debug=true"]
+    serverConfigFile = "tomcat.xml"
+    servletContainer = "tomcat8"
+}
+
+/* WAR packaging configuration */
+war {
+    exclude "**/angular-template*"
+}
+
+/* Asset pipeline configuration */
+assets {
+    configOptions = [
+        angular: [
+            templateFolder: "ng-views",
+            compressHtml: true,
+            moduleNameBase: "fhdaApp",
+            preserveHtmlComments: false,
+            includePathInName: false
+        ]
+    ]
+    enableSourceMaps = false
+    minifyOptions = [
+        languageMode: "ES5",
+        targetLanguage: "ES5",
+        optimizationLevel: "WHITESPACE_ONLY"
+    ]
+}
+
+/* Custom task to copy compiled assets into the WEB-INF folder for packaging */
+task assetCopyWebinf(type: Copy) {
+    from("build/assets") {
+        exclude "application-*.js", "*.js.map", "*.gz", "*.properties", "ng-views"
+    }
+    into "src/main/webapp/WEB-INF/assets"
+}
+war.dependsOn "assetCompile"
+assetCompile.finalizedBy "assetCopyWebinf"

@@ -1,0 +1,31 @@
+/* Build script dependencies */
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.2.0"
+        classpath "com.craigburke.angular:angular-template-asset-pipeline:2.1.0"
+    }
+}
+
+/* Inherit from build template */
+apply from: "template.gradle"
+
+/* Project configuration */
+project.ext.applicationName = "spr12551demo"
+project.group = "edu.fhda"
+project.sourceCompatibility = "1.8"
+project.targetCompatibility = "1.8"
+project.version = "1.0"
+
+/* Gretty configuration */
+gretty {
+    contextPath = "/${project.ext.applicationName}"
+    loggingLevel = "DEBUG"
+}
+
+/* WAR packaging configuration */
+war {
+    archiveName = "${project.ext.applicationName}.war"
+}
