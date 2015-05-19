@@ -27,7 +27,7 @@ public class TestConfiguration {
      * external application *.conf file.
      * @return If successful, a javax.sql.DataSource object
      */
-    @Bean
+    @Bean(destroyMethod = "")
     @Profile("test")
     public DataSource dataSource() {
         // Define a HikariCP configuration

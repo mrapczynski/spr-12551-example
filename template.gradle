@@ -9,8 +9,9 @@ apply from: "https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.p
 repositories {
     jcenter()
     mavenCentral()
-    maven { url "http://sonatype.ad.fhda.edu/nexus/content/repositories/fhda" }
-    maven { url "http://sonatype.ad.fhda.edu/nexus/content/repositories/thirdparty" }
+    //maven { url "http://sonatype.ad.fhda.edu/nexus/content/repositories/fhda" }
+    //maven { url "http://sonatype.ad.fhda.edu/nexus/content/repositories/thirdparty" }
+    maven { url "http://repo.spring.io/snapshot" }
 }
 
 /* Template details */
@@ -19,7 +20,7 @@ project.ext.templateVersion = "preview"
 /* Project Dependencies */
 dependencies {
     /* Spring dependencies */
-    def springVersion = "4.1.6.RELEASE"
+    def springVersion = "4.2.0.BUILD-SNAPSHOT"
     def springSecurityVersion = "4.0.0.RELEASE"
     compile "org.springframework:spring-webmvc:${springVersion}"
     compile "org.springframework:spring-context-support:${springVersion}"
@@ -39,7 +40,7 @@ dependencies {
     compile "org.freemarker:freemarker:2.3.22"
     compile "com.google.guava:guava:18.0"
     compile "com.typesafe:config:1.2.1"
-    compile "edu.fhda:splunk-appender-logback:1.3"
+    //compile "edu.fhda:splunk-appender-logback:1.3"
     compile "org.codehaus.janino:janino:2.7.8"
     compile "org.apache.commons:commons-lang3:3.4"
     compile "com.fasterxml.jackson.core:jackson-databind:2.5.3"
