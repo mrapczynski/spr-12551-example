@@ -28,7 +28,6 @@ public class SpringAppRootConfig {
      * @throws NamingException If lookup fails and shared data source cannot be found
      */
     @Bean(destroyMethod = "")
-    //@Profile("tomcat")
     public DataSource dataSource() throws NamingException {
         return (DataSource) new JndiTemplate().lookup("java:comp/env/jdbc/banner");
     }

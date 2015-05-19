@@ -46,7 +46,7 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-databind:2.5.3"
     providedCompile "javax.servlet:javax.servlet-api:3.1.0"
     gretty "com.zaxxer:HikariCP:2.3.7"
-    gretty "com.oracle:ojdbc6:11.2.0.4"
+    //gretty "com.oracle:ojdbc6:11.2.0.4"
     gretty "com.h2database:h2:1.4.187"
 
     /* Testing libraries */

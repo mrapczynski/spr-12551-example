@@ -1,7 +1,5 @@
 package edu.fhda.spr12551demo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -13,9 +11,6 @@ import org.springframework.core.env.Environment;
  */
 @Configuration
 public class AppConfig {
-
-    /* SLF4J Logger */
-    private final static Logger log = LoggerFactory.getLogger(AppConfig.class);
 
     /* Spring beans */
     @Autowired private Environment environment;

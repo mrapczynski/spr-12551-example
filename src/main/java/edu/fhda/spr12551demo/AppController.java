@@ -1,7 +1,5 @@
 package edu.fhda.spr12551demo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,9 +19,6 @@ import java.util.Map;
  */
 @Controller
 public class AppController {
-
-    /* SLF4J Logger */
-    private final static Logger log = LoggerFactory.getLogger(AppController.class);
 
     /* Spring beans */
     @Autowired DataSource dataSource;

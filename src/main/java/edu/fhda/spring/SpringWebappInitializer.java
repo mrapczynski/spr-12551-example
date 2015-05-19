@@ -1,8 +1,6 @@
 package edu.fhda.spring;
 
 import edu.fhda.spring.util.DoNotModify;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -14,9 +12,6 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  */
 @DoNotModify
 public class SpringWebappInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
-
-    /* SLF4J Logger */
-    private final static Logger log = LoggerFactory.getLogger(SpringWebappInitializer.class);
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
